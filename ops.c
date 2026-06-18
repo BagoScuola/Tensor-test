@@ -5,7 +5,7 @@ int somma(Stack *s){
 
 
   //Controllo che ci siano abbastanza elementi nello stack
-if (s->dim < 2){
+if (s->top < 1){
     printf("Lo stack non ha abbastanza elementi\n");
     exit(EXIT_FAILURE);
   }
@@ -53,4 +53,5 @@ if (s->dim < 2){
     decrement_refcount(a);
     decrement_refcount(b);
 
+    return 0;
 };
