@@ -66,8 +66,11 @@ void scorri_file(Stack *s,char *filename){
             if (len < 255) token[len++] = c;
         }
         token[len] = '\0';
-        if (strcmp(token, "+") == 0) {
+        if (strcmp(token, "+") == 0 || strcmp(token, "somma") == 0) {
             somma(s);
+        } else {
+            printf("Errore: operazione non valida: %s\n", token);
+            exit(EXIT_FAILURE);
         }
         }
         break;
