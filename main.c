@@ -66,7 +66,7 @@ void scorri_file(Stack *s,char *filename){
             if (len < 255) token[len++] = c;
         }
         token[len] = '\0';
-        if (strcmp(token, "+") == 0 || strcmp(token, "somma") == 0) {
+        if (strcmp(token, "+") == 0) {
             somma(s);
         }
         }
