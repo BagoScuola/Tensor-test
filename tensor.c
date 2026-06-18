@@ -136,9 +136,10 @@ int decrement_refcount(Tensor *t){
 
   if (t->refcount == 0) {
     free(t->data);
+    free(t);
   }
 
-  free(t);
+
   return 0;
 
 };
