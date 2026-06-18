@@ -11,9 +11,17 @@ if (s->top < 1){
   }
 
 
-  //Prendo gli elementi da sommare
-  Tensor *a = pop(s);
-  Tensor *b = pop(s);
+  //Prendo gli elementi da sommare (con controllo tipo)
+  StackValue va = pop_value(s);
+  StackValue vb = pop_value(s);
+
+  if (va.type != SV_TENSOR || vb.type != SV_TENSOR) {
+    printf("Errore: somma richiede due tensori\n");
+    exit(EXIT_FAILURE);
+  }
+
+  Tensor *a = va.as.tensor;
+  Tensor *b = vb.as.tensor;
 
 
   //Controllo che la dimensione dei tensori sia la stessa
@@ -47,7 +55,7 @@ if (s->top < 1){
     }
 
       //pusho il nuovo tensore nello stack
-     push(s, res);
+     push_tensor(s, res);
 
     // Rilasciamo i riferimenti degli operandi consumati
     decrement_refcount(a);

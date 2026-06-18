@@ -48,6 +48,7 @@ void scorri_file(Stack *s,char *filename){
         break;
       case '"':
         dim_working_file = get_working_file(f,working_file);
+        push_string(s, strdup(working_file));
         //FILE * prova = fopen(working_file,"w");
         //printf("%s \n", working_file);
         break;
@@ -77,7 +78,12 @@ void scorri_file(Stack *s,char *filename){
 
   // scrivo il risultato sul file di output
   if (dim_working_file > 0) {
-    Tensor *res = pop(s);
+    StackValue sv = pop_value(s);
+    if (sv.type != SV_TENSOR) {
+      printf("Errore: il valore in cima allo stack non è un tensor\n");
+      exit(EXIT_FAILURE);
+    }
+    Tensor *res = sv.as.tensor;
     FILE *fout = fopen(working_file, "w");
     if (fout == NULL) {
         printf("Errore aprendo il file di output\n");
